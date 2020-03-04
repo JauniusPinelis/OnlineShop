@@ -17,7 +17,7 @@ namespace Shop.UI.Pages
         private readonly ApplicationDbContext _ctx;
 
         [BindProperty]
-        public CreateProduct.ProductViewModel Product { get; set; }
+        public CreateProduct.Request Product { get; set; }
 
         public IEnumerable<GetProducts.ProductViewModel> Products { get; set; }
 
@@ -32,11 +32,6 @@ namespace Shop.UI.Pages
             Products = new GetProducts(_ctx).Do();
         }
 
-        public async Task<ActionResult> OnPost()
-        {
-            await new CreateProduct(_ctx).Do(Product);
-
-            return RedirectToPage("Index");
-        }
+        
     }
 }
