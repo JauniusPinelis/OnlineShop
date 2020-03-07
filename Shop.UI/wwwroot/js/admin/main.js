@@ -1,6 +1,8 @@
 ﻿var app = new Vue({
     el: "#app",
     data: {
+        loading: false,
+        editing: false,
         price: 0,
         index: 0,
         showPrice: false,
@@ -10,8 +12,8 @@
             description: "Product Description",
             value: 1.99
         },
-        loading: false,
-        products: []
+        products: [],
+        menu: 0
     },
     mounted() {
         this.getProducts();
@@ -69,24 +71,22 @@
                 })
                 .then(() => {
                     this.loading = false
+                    this.editing = false
                 })
-        },
-        editProduct(id, index) {
-            this.objectIndex = index;
-            this.getProduct(id);
         },
         updateProduct() {
             this.loading = true;
             axios.put('/Admin/products', this.productModel)
                 .then(res => {
                     console.log(res);
-                    this.products.splice(this.objectIndex,1 , res.data);
+                    this.products.splice(this.objectIndex, 1, res.data);
                 })
                 .catch(err => {
                     console.log(err);
                 })
                 .then(() => {
                     this.loading = false
+                    this.editing = false
                 })
         },
         deleteProduct(id, index) {
@@ -102,12 +102,26 @@
                 .then(() => {
                     this.loading = false
                 })
+        },
+        newProduct() {
+            this.editing = true;
+            this.productModel.id = 0;
+        },
+        editProduct(id, index) {
+            this.objectIndex = index;
+            this.getProduct(id);
+            this.editing = true;
+        },
+        cancel() {
+
         }
+
+
 
 
     },
     computed: {
-        formatPrice: function(){
+        formatPrice: function () {
             return "$" + this.price;
         }
     }
