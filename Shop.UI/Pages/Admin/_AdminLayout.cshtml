@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Shop.UI</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
     <link href="~/lib/bulma-0.8.0/css/bulma.css" rel="stylesheet" />
 </head>
 <body>
@@ -33,34 +32,37 @@
             </div>
         </nav>
     </header>
-        <div class="container">
-            <div class="columns">
-                <div class="column is-3">
-                    <div class="menu">
-                        <p class="menu-label">Admin Menu</p>
-                        <ul class="menu-list">
-                            <li><a @@click="menu = 0">Products</a></li>
-                            <li><a @@click="menu = 1">Orders</a></li>
-                            <li><a @@click="menu = 2">Stock</a></li>
-                        </ul>
-                    </div>
+    <div class="container">
+        <div class="columns">
+            <div class="column is-3">
+                <div class="menu">
+                    <p class="menu-label">Admin Menu</p>
+                    <ul class="menu-list">
+                        <li><a @@click="menu = 0">Products</a></li>
+                        <li><a @@click="menu = 1">Orders</a></li>
+                        <li><a @@click="menu = 2">Stock</a></li>
+                    </ul>
                 </div>
-                <div class="column is-9">
-                    @RenderBody()
-                </div>
+            </div>
+            <div class="column is-9">
+                @RenderBody()
             </div>
         </div>
+    </div>
 
-        <footer class="border-top footer text-muted">
-            <div class="container">
-                &copy; 2020 - Shop.UI - <a asp-area="" asp-page="/Privacy">Privacy</a>
-            </div>
-        </footer>
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2020 - Shop.UI - <a asp-area="" asp-page="/Privacy">Privacy</a>
+        </div>
+    </footer>
 
-        <script src="~/lib/jquery/dist/jquery.min.js"></script>
-        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 
-        @RenderSection("Scripts", required: false)
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @RenderSection("Scripts", required: false)
 </body>
 </html>

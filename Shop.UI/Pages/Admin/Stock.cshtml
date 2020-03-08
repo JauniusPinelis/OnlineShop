@@ -2,4 +2,44 @@
 @{
 }
 
-<h2>Stock</h2>
+    <div class="app">
+        <div class="columns">
+            <div class="column is-3">
+                <table class="table">
+                    <tr v-for="product in products" @@click="selectProduct(product)">
+                        <td>
+                            {{product.description}}
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="column is-9">
+                <table class="table" v-if="selectedProduct">
+                    <tr v-for="stock in selectedProduct.stock">
+                        <td></td>
+                    </tr>
+                </table>
+                <a class="button is-warning" href="updateProducts">
+                    Update Products
+                </a>
+            </div>
+            <div class="column is-3">
+                <h2>New Stock</h2>
+                <div class="field">
+                    <div class="control">
+                        <input class="input" v-model="newStock.description">
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="control">
+                        <input class="input" v-model="newStock.qty">
+                    </div>
+                </div>
+            </div>
+            <a class="button is-success" href="button" @@click="addStock">Add</a>
+        </div>
+    </div>
+
+@section scripts {
+
+}
