@@ -16,10 +16,11 @@
         <div class="column is-6" v-if="selectedProduct">
             <table class="table">
                 <tr v-for="stock in selectedProduct.stock">
-                    <td></td>
+                    <td>{{stock.description}}</td>
+                    <td>{{stock.qty}}</td>
                 </tr>
             </table>
-            <a class="button is-warning" href="updateProducts">
+            <a class="button is-warning">
                 Update Products
             </a>
         </div>
@@ -36,7 +37,7 @@
                 </div>
             </div>
         </div>
-        <a class="button is-success" href="button" @@click="addStock">Add</a>
+        <a class="button is-success" @@click="addStock">Add</a>
     </div>
 </div>
 

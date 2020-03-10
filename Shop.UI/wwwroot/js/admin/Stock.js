@@ -31,7 +31,7 @@
         },
         selectProduct(product) {
             this.selectedProduct = product;
-            this.newStock.productId = product.Id;
+            this.newStock.productId = product.id;
         },
         updateStock() {
 
@@ -41,7 +41,7 @@
             axios.post('/admin/stocks', this.newStock)
                 .then(res => {
                     console.log(res);
-                    this.products.stock.push(res.data);
+                    this.selectedProduct.stock.push(res.data);
                 })
                 .catch(err => {
                     console.log(err);

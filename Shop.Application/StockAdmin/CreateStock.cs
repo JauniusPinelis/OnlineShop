@@ -20,9 +20,9 @@ namespace Shop.Application.StockAdmin
         {
             var stock = new Stock()
             {
+                ProductId = request.ProductId,
                 Description = request.Description,
-                Qty = request.Qty,
-                ProductId = request.ProductId
+                Qty = request.Qty
             };
 
             _ctx.Stock.Add(stock);
@@ -31,6 +31,9 @@ namespace Shop.Application.StockAdmin
 
             return new Response()
             {
+                ProductId = request.ProductId,
+                Description = request.Description,
+                Qty = request.Qty
 
             };
         }
