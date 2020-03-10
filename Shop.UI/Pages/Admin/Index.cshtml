@@ -4,52 +4,49 @@
     ViewData["Title"] = "Index";
 }
 
+
 <div id="app" class="container">
-    <div>
-        <div v-if="!editing">
-            <button class="button" @@click="newProduct">Add New Product</button>
-            <table class="table">
-                <tr>
-                    <th>Id</th>
-                    <th>Name</th>
-                    <th>Value</th>
-                </tr>
-                <tr v-for="(product, index) in products">
-                    <td>{{product.id}}</td>
-                    <td>{{product.name}}</td>
-                    <td>{{product.value}}</td>
-                    <td><a @@click="editProduct(product.id,index)">Edit</a></td>
-                    <td><a @@click="deleteProduct(product.id, index)">Remove</a></td>
-                </tr>
-            </table>
+    <div v-if="!editing">
+        <button class="button" @@click="newProduct">Add New Product</button>
+        <table class="table">
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Value</th>
+            </tr>
+            <tr v-for="(product, index) in products">
+                <td>{{product.id}}</td>
+                <td>{{product.name}}</td>
+                <td>{{product.value}}</td>
+                <td><a @@click="editProduct(product.id,index)">Edit</a></td>
+                <td><a @@click="deleteProduct(product.id, index)">Remove</a></td>
+            </tr>
+        </table>
+    </div>
+    <div v-else>
+        <div class="field">
+            <div class="control">
+                <input type="input" v-model="productModel.name">
+            </div>
         </div>
-        <div v-else>
-            <div class="field">
-                <div class="control">
-                    <input type="input" v-model="productModel.name">
-                </div>
+        <div class="field">
+            <div class="control">
+                <input type="input" v-model="productModel.description">
             </div>
-            <div class="field">
-                <div class="control">
-                    <input type="input" v-model="productModel.description">
-                </div>
+        </div>
+        <div class="field">
+            <div class="control">
+                <input type="input" v-model="productModel.value">
             </div>
-            <div class="field">
-                <div class="control">
-                    <input type="input" v-model="productModel.value">
-                </div>
-            </div>
+        </div>
 
-            <button class="button is-success" @@click="createProduct" v-if="!productModel.id">Create Product</button>
-            <div v-if="productModel.id">
-                <button class="button is-warning" @@click="updateProduct">Update Product</button>
+        <button class="button is-success" @@click="createProduct" v-if="!productModel.id">Create Product</button>
+        <div v-if="productModel.id">
+            <button class="button is-warning" @@click="updateProduct">Update Product</button>
 
-                <button class="button" @@click="cancel">Cancel</button>
-            </div>
+            <button class="button" @@click="cancel">Cancel</button>
         </div>
     </div>
-    <p v-if="menu === 1">Orders</p>
-    <p v-if="menu === 2">Stock</p>
 </div>
 
 @section scripts {

@@ -40,7 +40,7 @@ namespace Shop.UI.Controllers
 
 
         [HttpGet("stocks")]
-        public IActionResult GetStock() => Ok(new GetStock(_ctx).Do());
+        public  IActionResult GetStock() => Ok(new GetStock(_ctx).Do());
 
         [HttpPost("stocks")]
         public async Task<IActionResult> CreateStock([FromBody]CreateStock.Request request) => Ok(await new CreateStock(_ctx).Do(request));

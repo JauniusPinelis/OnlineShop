@@ -1,14 +1,15 @@
 ﻿var app = new Vue({
     el: '#app',
-    data: {
-        products: [], 
-        selectedProduct: null,
-        newStock: {
-            productId: 0,
-            description: "Size",
-            qty: 10
+    data() {
+        return {
+            products: [],
+            selectedProduct: null,
+            newStock: {
+                productId: 0,
+                description: "Size",
+                qty: 10
+            }
         }
-
     },
     mounted() {
         this.getStock()
@@ -16,7 +17,7 @@
     methods: {
         getStock() {
             this.loading = true;
-            axios.get('/Admin/stock')
+            axios.get('/Admin/stocks')
                 .then(res => {
                     console.log(res);
                     this.products = res.data;

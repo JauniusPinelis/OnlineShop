@@ -18,7 +18,7 @@ namespace Shop.Application.StockAdmin
             _ctx = ctx;
         }
 
-        public async Task<IEnumerable<ProductViewModel>> Do()
+        public  IEnumerable<ProductViewModel> Do()
         {
             var stock = _ctx.Products
                 .Include(x => x.Stock)
