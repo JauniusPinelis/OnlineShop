@@ -31,14 +31,14 @@
         },
         selectProduct(product) {
             this.selectedProduct = product;
-            this.newStock.productId = productId;
+            this.newStock.productId = product.Id;
         },
         updateStock() {
 
         },
         addStock() {
             this.loading = true;
-            axios.post('/admin/stock', this.newStock)
+            axios.post('/admin/stocks', this.newStock)
                 .then(res => {
                     console.log(res);
                     this.products.stock.push(res.data);
