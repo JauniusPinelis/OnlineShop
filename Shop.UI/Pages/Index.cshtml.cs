@@ -19,6 +19,7 @@ namespace Shop.UI.Pages
         [BindProperty]
         public CreateProduct.Request Product { get; set; }
 
+        [BindProperty]
         public IEnumerable<GetProducts.ProductViewModel> Products { get; set; }
 
         public IndexModel(ILogger<IndexModel> logger, ApplicationDbContext ctx)

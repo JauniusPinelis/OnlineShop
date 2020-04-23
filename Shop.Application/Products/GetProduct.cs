@@ -1,4 +1,5 @@
-﻿using Shop.Database;
+﻿using Microsoft.EntityFrameworkCore;
+using Shop.Database;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,15 +15,25 @@ namespace Shop.Application.GetProduct
             _ctx = ctx;
         }
 
-        public ProductViewModel Do(int id) =>
-            _ctx.Products.Where(p => p.Id == id).Select(x => new ProductViewModel()
+        public ProductViewModel Do(string name) =>
+            _ctx.Products
+            .Include(p => p.Stock)
+            .Where(p => p.Name == name)
+            .Select(x => new ProductViewModel()
             {
                 Id = x.Id,
                 Name = x.Name,
                 Description = x.Description,
-                Value = x.Value
+                Value = x.Value,
+                Stock = x.Stock.Select( y => new StockViewModel
+                {
+                    Id = y.Id,
+                    Description = y.Description,
+                    InStock = y.Qty > 0
+                    
+                })
             }).FirstOrDefault();
-        
+
 
         public class ProductViewModel
         {
@@ -30,6 +41,16 @@ namespace Shop.Application.GetProduct
             public string Name { get; set; }
             public string Description { get; set; }
             public decimal Value { get; set; }
+
+            public IEnumerable<StockViewModel> Stock { get; set; }
+        }
+
+        public class StockViewModel
+        {
+            public int Id { get; set; }
+            public string Description { get; set; }
+
+            public bool InStock { get; set; }
         }
     }
 }

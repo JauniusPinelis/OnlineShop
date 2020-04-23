@@ -1,0 +1,25 @@
+﻿@page "{name}"
+@model ProductModel
+
+<h1>Product</h1>
+<div>
+	<p>name: @Model.Product.Name</p>
+	<p>@Model.Product.Description</p>
+	<p>@Model.Product.Id</p>
+	<div>
+		<form method="post">
+			<label for="">Stock</label>
+			<select asp-for="@Model.CartViewModel.StockId">
+				@foreach (var s in Model.Product.Stock)
+				{
+					<option value="@s.Id">@s.Description</option>
+				}
+
+			</select>
+			<button type="submit">Submit</button>
+		</form>
+		
+	</div>
+</div>
+
+
