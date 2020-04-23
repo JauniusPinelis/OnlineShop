@@ -38,7 +38,7 @@ namespace Shop.UI.Pages
         {
             new AddToCart(HttpContext.Session).Do(CartViewModel);
 
-            return RedirectToPage("Index");
+            return RedirectToPage("Cart");
         }
     }
 }
