@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using Shop.Domain.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Shop.Application.Cart
@@ -21,18 +22,36 @@ namespace Shop.Application.Cart
 			public int StockId { get; set; }
 			public int Qty { get; set; }	
 		}
-
 		public void Do(Request request)
 		{
-			var cartProduct = new CartProduct()
+
+			var cartList = new List<CartProduct>();
+			var stringObject = _session.GetString("cart");
+
+			if (!string.IsNullOrEmpty(stringObject))
 			{
-				StockId = request.StockId,
-				Qty = request.StockId
-			};
+				cartList = JsonConvert.DeserializeObject<List<CartProduct>>(stringObject);
+			}
 
-			var stringObject = JsonConvert.SerializeObject(cartProduct);
+			if (cartList.Any(x => x.StockId == request.StockId))
+			{
+				cartList.Find(c => c.StockId == request.StockId).Qty += request.Qty;
+			}
+			else
+			{
+				cartList.Add(new CartProduct()
+				{
+					StockId = request.StockId,
+					Qty = request.Qty
+				});
+			}
 
-			_session.SetString("cart", stringObject);
+			var toStore = JsonConvert.SerializeObject(cartList);
+
+			_session.SetString("cart", toStore);
+
+
+			
 		}
 	}
 }
